@@ -1,0 +1,73 @@
+{
+  "services": [
+    {
+      "icon": "transfers.png",
+      "name": "Transfers",
+      "bg": "#5654DA"
+    },
+    {
+      "icon": "transfers.png",
+      "name": "Loans",
+      "bg": "#5654DA"
+    },
+    {
+      "icon": "transfers.png",
+      "name": "Credits",
+      "bg": "#5654DA"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "alice",
+      "password": "alice2025",
+      "sex": "F",
+      "name": "Alice",
+      "avatar": "1.jpg",
+      "creditCards": [
+        { "number": "1234 5678 9012 3456", "expiry": "12/25" },
+        { "number": "9876 5432 1098 7654", "expiry": "06/24" }
+      ],
+      "balance": 550,
+      "transactions": [
+        {
+          "date": "2023-03-01",
+          "amount": 100,
+          "type": "credit",
+          "description": "Salary"
+        },
+        {
+          "date": "2023-03-05",
+          "amount": 50,
+          "type": "debit",
+          "description": "Groceries"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "sex": "M",
+      "name": "Jamal",
+      "username": "jamal",
+      "password": "jamal2025",
+      "avatar": "2.avif",
+      "creditCards": [{ "number": "1111 2222 3333 4444", "expiry": "09/26" }],
+      "balance": 200,
+      "transactions": [
+        {
+          "date": "2023-03-02",
+          "amount": 200,
+          "type": "credit",
+          "description": "Salary"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Charlie",
+      "creditCards": [],
+      "balance": 0,
+      "transactions": []
+    }
+  ]
+}
