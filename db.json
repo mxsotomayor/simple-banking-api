@@ -25,22 +25,100 @@
       "name": "Alice",
       "avatar": "1.jpg",
       "creditCards": [
-        { "number": "1234 5678 9012 3456", "expiry": "12/25" },
-        { "number": "9876 5432 1098 7654", "expiry": "06/24" }
+        {
+          "cardId": "cc1",
+          "holderName": "Alice Johnson",
+          "cardNumber": "4111 1111 1111 1111",
+          "cardType": "Credit",
+          "cardIssuer": "Visa",
+          "expiry": "12/26"
+        },
+        {
+          "cardId": "cc2",
+          "holderName": "Bob Smith",
+          "cardNumber": "5500 0000 0000 0004",
+          "cardType": "Debit",
+          "cardIssuer": "MasterCard",
+          "expiry": "07/25"
+        },
+        {
+          "cardId": "cc3",
+          "holderName": "Carla Mendes",
+          "cardNumber": "6011 0009 9013 9424",
+          "cardType": "Credit",
+          "cardIssuer": "Discover",
+          "expiry": "11/24"
+        },
+        {
+          "cardId": "cc4",
+          "holderName": "David Chen",
+          "cardNumber": "3782 822463 10005",
+          "cardType": "Charge",
+          "cardIssuer": "American Express",
+          "expiry": "03/27"
+        }
       ],
       "balance": 550,
       "transactions": [
         {
           "date": "2023-03-01",
-          "amount": 100,
+          "amount": 1000,
           "type": "credit",
           "description": "Salary"
         },
         {
-          "date": "2023-03-05",
-          "amount": 50,
+          "date": "2023-03-03",
+          "amount": 45.50,
           "type": "debit",
           "description": "Groceries"
+        },
+        {
+          "date": "2023-03-05",
+          "amount": 120.00,
+          "type": "debit",
+          "description": "Electricity Bill"
+        },
+        {
+          "date": "2023-03-08",
+          "amount": 200.00,
+          "type": "credit",
+          "description": "Freelance Payment"
+        },
+        {
+          "date": "2023-03-10",
+          "amount": 35.00,
+          "type": "debit",
+          "description": "Gym Membership"
+        },
+        {
+          "date": "2023-03-12",
+          "amount": 10.99,
+          "type": "debit",
+          "description": "Spotify Subscription"
+        },
+        {
+          "date": "2023-03-15",
+          "amount": 85.00,
+          "type": "credit",
+          "description": "Cashback Reward"
+        },
+        {
+          "date": "2023-03-17",
+          "amount": 60.00,
+          "type": "debit",
+          "description": "Dinner at Restaurant"
+        },
+        {
+          "date": "2023-03-20",
+          "amount": 25.00,
+          "type": "debit",
+          "description": "Book Purchase"
+        },
+        {
+          "date": "2023-03-22",
+          "amount": 500.00,
+          "type": "credit",
+          "description": "Bonus"
         }
       ]
     },
