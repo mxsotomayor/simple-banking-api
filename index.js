@@ -1,7 +1,6 @@
 const express = require("express");
-const fs = require("fs");
 const path = require("path");
-
+const DBProvider = require("./db.provider");
 const app = express();
 const port = 9001;
 
@@ -9,44 +8,28 @@ const port = 9001;
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-// === Read data from db.json on server startup === //
-
-// === Helper function to save data back to db.json === //
-function saveData() {
-  const jsonData = JSON.stringify({ users }, null, 2); // Pretty-print with 2 spaces
-  fs.writeFileSync(path.join(__dirname, "db.json"), jsonData, "utf8");
-}
-
-function loadData(key) {
-  let rawData = fs.readFileSync(path.join(__dirname, "db.json"), "utf8");
-  let data = JSON.parse(rawData);
-  return data[key];
-}
-
 // === Endpoints === //
 
-// 1) Root endpoint
-app.get("/", (req, res) => {
-  res.json({
-    message: "Welcome to my simple Express API with a JSON file DB!",
-  });
-});
-
 // 2) Get all users
-app.get("/users", (req, res) => {
-  res.json(loadData("users"));
+app.get("/cardIssuers/:name", (req, res) => {
+  const filepath = path.join(__dirname, "public", "cards", req.params.name + ".svg");
+  res.setHeader("Content-Type", "image/svg+xml");
+  res.sendFile(filepath);
 });
 
-app.get("/auth", (req, res) => {
-  const { username, password } = req.body;
+app.get("/users", (req, res) => {
+  res.json(DBProvider.pullData("users"));
+});
 
+app.post("/auth", (req, res) => {
+  const { username, password } = req.body;
   res.status(401);
 });
 
 // 3) Get a single user by ID (including credit cards, balance, and transactions)
 app.get("/users/:id", (req, res) => {
   const userId = parseInt(req.params.id, 10);
-  const user = loadData("users").find((u) => u.id === userId);
+  const user = DBProvider.pullData("users").find((u) => u.id === userId);
 
   if (!user) {
     return res.status(404).json({ error: "User not found" });
@@ -60,7 +43,9 @@ app.post("/users", (req, res) => {
   // In a real app, validations and error handling would be more robust.
   const newUser = {
     ...req.body,
-    id: loadData("users").length ? users[users.length - 1].id + 1 : 1, // Basic auto-increment
+    id: DBProvider.pullData("users").length
+      ? users[users.length - 1].id + 1
+      : 1, // Basic auto-increment
   };
 
   users.push(newUser);
@@ -78,7 +63,9 @@ app.post("/users", (req, res) => {
 //    e.g. to add a transaction or modify balance for an existing user
 app.put("/users/:id", (req, res) => {
   const userId = parseInt(req.params.id, 10);
-  const userIndex = loadData("users").findIndex((u) => u.id === userId);
+  const userIndex = DBProvider.pullData("users").findIndex(
+    (u) => u.id === userId
+  );
 
   if (userIndex === -1) {
     return res.status(404).json({ error: "User not found" });
@@ -95,7 +82,7 @@ app.put("/users/:id", (req, res) => {
   users[userIndex] = updatedUser;
 
   // Save updates to db.json
-  saveData();
+  DBProvider.flushData();
 
   res.json({
     message: "User updated successfully!",
