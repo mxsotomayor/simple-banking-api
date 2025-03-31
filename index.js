@@ -8,9 +8,9 @@ const port = 9001;
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-// === Endpoints === //
+// 🚀 === Endpoints === //
 
-// 2) Get all users
+// 😉 forcing content for svg files
 app.get("/cardIssuers/:name", (req, res) => {
   const filepath = path.join(__dirname, "public", "cards", req.params.name + ".svg");
   res.setHeader("Content-Type", "image/svg+xml");
